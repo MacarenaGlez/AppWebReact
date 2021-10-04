@@ -9,13 +9,27 @@ class App extends Component {
     pagina: "",
   };
 
-  paginacionAnterior = () => {};
+  paginacionAnterior = () => {
+    let pagina = this.state.pagina;
+    if(pagina === 1) return null;
+    pagina -= 1;
+    this.setState({
+      pagina,
+    });
+  };
 
-  paginacionSiguiente = () => {};
+  paginacionSiguiente = () => {
+    let pagina = this.state.pagina;
+    pagina += 1;
+    this.setState({
+      pagina,
+    });
+  };
 
   consultarApi = () => {
     const termino = this.state.termino;
-    const url = `https://pixabay.com/api/?key=1732750-d45b5378879d1e877cd1d35a6&q=${termino}&per_page=30`;
+    const pagina = this.state.pagina;
+    const url = `https://pixabay.com/api/?key=1732750-d45b5378879d1e877cd1d35a6&q=${termino}&per_page=30&page=${pagina}`;
 
     //console.log(url);
     fetch(url)

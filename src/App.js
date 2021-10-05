@@ -9,21 +9,50 @@ class App extends Component {
     pagina: "",
   };
 
-  paginacionAnterior = () => {
-    let pagina = this.state.pagina;
-    if(pagina === 1) return null;
-    pagina -= 1;
-    this.setState({
-      pagina,
-    });
+  scroll = () => {
+    const elemento = document.querySelector(".jumbotron");
+    elemento.scrollIntoView("smooth", "start");
   };
 
-  paginacionSiguiente = () => {
+  paginaAnterior = () => {
+    //Leer el state de la página actual
     let pagina = this.state.pagina;
+
+    //Leer si la página es 1, ya no ir hacia atrás
+    if (pagina === 1) return null;
+
+    //Resta uno a la página actual
+    pagina -= 1;
+
+    //Agregar el cambio al state
+    this.setState(
+      {
+        pagina,
+      },
+      () => {
+        this.consultarApi();
+        this.scroll();
+      }
+    );
+  };
+
+  paginaSiguiente = () => {
+    //Leer el state de la página actual
+    let pagina = this.state.pagina;
+
+    //Sumar uno a la página actual
     pagina += 1;
-    this.setState({
-      pagina,
-    });
+
+    //Agregar el cambio al state
+    this.setState(
+      {
+        pagina,
+      },
+      () => {
+        this.consultarApi();
+        this.scroll();
+      }
+    );
   };
 
   consultarApi = () => {
@@ -59,8 +88,8 @@ class App extends Component {
         <div className="row justify-content-center">
           <Resultado
             imagenes={this.state.imagenes}
-            paginacionAnterior={this.paginacionAnterior}
-            paginacionSiguiente={this.paginacionSiguiente}
+            paginaAnterior={this.paginaAnterior}
+            paginaSiguiente={this.paginaSiguiente}
           />
         </div>
       </div>

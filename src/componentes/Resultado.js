@@ -16,8 +16,8 @@ class Resultado extends Component {
           ))}
         </div>
         <Paginacion
-          paginacionAnterior={this.props.paginacionAnterior}
-          paginacionSiguiente={this.props.paginacionSiguiente}
+          paginaAnterior={this.props.paginaAnterior}
+          paginaSiguiente={this.props.paginaSiguiente}
         />
       </React.Fragment>
     );
